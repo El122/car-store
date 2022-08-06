@@ -2,6 +2,9 @@
 
 namespace App\Providers;
 
+use App\Models\Drive;
+use App\Models\EngineType;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -23,6 +26,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        $drive = Drive::all();
+        $engins = EngineType::all();
+
+        View::share(["drive" => $drive, "engins" => $engins]);
     }
 }

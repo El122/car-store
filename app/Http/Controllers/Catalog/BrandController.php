@@ -22,16 +22,12 @@ class BrandController extends Controller
 
         $brandInfo = CarMark::where("id", "=", $brand)->select("name", "id")->first();
         $models = Cars::where("mark_id", "=", $brand)->get();
-        $drive = Drive::all();
-        $engins = EngineType::all();
 
         return view(
             "catalog.brand",
             [
                 "brandInfo" => $brandInfo,
                 "cars" => $cars,
-                "drive" => $drive,
-                "engins" => $engins,
                 "models" => $models,
                 "params" => $request->getQueryString()
             ]

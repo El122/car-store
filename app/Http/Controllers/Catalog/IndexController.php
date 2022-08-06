@@ -16,17 +16,12 @@ class IndexController extends Controller
     {
         $filter = app()->make(ProductFilter::class, ["queryParams" => array_filter($request->query())]);
         $cars = Product::with("car")->filter($filter)->get();
-
-        $drive = Drive::all();
-        $engins = EngineType::all();
         $marks = CarMark::all();
 
         return view(
             "catalog.index",
             [
                 "cars" => $cars,
-                "drive" => $drive,
-                "engins" => $engins,
                 "marks" => $marks,
                 "params" => $request->getQueryString()
             ]

@@ -18,17 +18,12 @@ class ModelController extends Controller
         $data = Product::with("car")->whereHas('car', function ($query) use ($brand, $model) {
             return $query->where('mark_id', '=', $brand)->where('car_id', '=', $model);
         })->filter($filter)->get();
-
-        $drive = Drive::all();
-        $engins = EngineType::all();
         $title = Cars::where("id", "=", $model)->select("model", "mark_id")->first();
 
         return view(
             "catalog.model",
             [
                 "title" => $title->mark->name . " " . $title->model,
-                "drive" => $drive,
-                "engins" => $engins,
                 "cars" => $data,
                 "params" => $request->getQueryString()
             ]
